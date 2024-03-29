@@ -26,6 +26,13 @@ public class Main {
 		List<Seller> sellers = sellerDAO.findByDepartment(department);
 		for(Seller sellerTemp : sellers)
 			System.out.println(sellerTemp);
+		
+		System.out.println();
+
+		System.out.println("--- TEST : findAll Seller ---");
+		List<Seller> sellersAll = sellerDAO.findAll();
+		for(Seller sellerTemp : sellersAll)
+			System.out.println(sellerTemp);
 	}
 
 }
