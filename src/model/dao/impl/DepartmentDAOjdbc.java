@@ -1,21 +1,17 @@
 package model.dao.impl;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import db.DB;
 import db.DBException;
 import model.dao.DepartmentDAO;
 import model.entities.Department;
-import model.entities.Seller;
 
 public class DepartmentDAOjdbc implements DepartmentDAO{
 
