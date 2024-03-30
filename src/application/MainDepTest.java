@@ -17,6 +17,16 @@ public class MainDepTest {
 		System.out.println("--- TEST : Insert Department ---");
 		Department DepartmentNew = new Department("Gardening");
 		departmentDAO.insert(DepartmentNew);
+		
+		System.out.println("");
+		
+		System.out.println("--- TEST : Update Department ---");
+		Department department = departmentDAO.findById(1);
+		department.setName("Movies");
+		departmentDAO.update(department);
+		System.out.println("Update successful ");
+		
+		
 		scanner.close();
 	}
 

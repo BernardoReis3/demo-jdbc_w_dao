@@ -1,7 +1,9 @@
 package model.dao.impl;
 
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -10,6 +12,7 @@ import db.DB;
 import db.DBException;
 import model.dao.DepartmentDAO;
 import model.entities.Department;
+import model.entities.Seller;
 
 public class DepartmentDAOjdbc implements DepartmentDAO{
 
@@ -51,7 +54,27 @@ public class DepartmentDAOjdbc implements DepartmentDAO{
 
 	@Override
 	public void update(Department d) {
+		PreparedStatement prepared = null;
 		
+		try {
+			prepared = connection.prepareStatement(	
+					"UPDATE department " 
+					+ "SET Name = ? " 
+					+ "WHERE Id = ? ");
+			
+			prepared.setString(1, d.getName());
+			prepared.setInt(2, d.getId());
+		
+			
+			prepared.executeUpdate();
+					
+		}
+		catch (SQLException sqle) {
+			throw new DBException(sqle.getMessage());
+		}
+		finally {
+			DB.closeStatement(prepared);
+		}
 	}
 
 	@Override
@@ -61,7 +84,36 @@ public class DepartmentDAOjdbc implements DepartmentDAO{
 
 	@Override
 	public Department findById(int id) {
-		return null;
+		PreparedStatement prepared = null;
+		ResultSet rs = null;
+		
+		try {
+			prepared = connection.prepareStatement(	
+					"SELECT * FROM department WHERE Id = ?");
+		
+			prepared.setInt(1, id);
+			rs = prepared.executeQuery();
+			if(rs.next()) {
+				Department department = instantiateDepartment(rs);	
+				return department;
+			}
+			return null;
+			
+		}
+		catch (SQLException sqle) {
+			throw new DBException(sqle.getMessage());
+		}
+		finally {
+			DB.closeStatement(prepared);
+			DB.closeResultSet(rs);
+		}
+	}
+	
+	private Department instantiateDepartment(ResultSet rs) throws SQLException {
+		Department dep = new Department(); 
+		dep.setId(rs.getInt("Id")); 
+		dep.setName(rs.getString("Name")); 
+		return dep;
 	}
 
 	@Override
