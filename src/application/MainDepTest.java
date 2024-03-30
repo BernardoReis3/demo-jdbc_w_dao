@@ -30,6 +30,14 @@ public class MainDepTest {
 		
 		System.out.println("");
 		
+		System.out.println("--- TEST : Delete Department ---");
+		System.out.println("Inform an id to delete: ");
+		int id = scanner.nextInt();
+		departmentDAO.deleteById(id);;
+		System.out.println("Delete successful ");
+		
+		System.out.println();
+		
 		System.out.println("--- TEST : findAll Department ---");
 		List<Department> departmentsAll = departmentDAO.findAll();
 		for(Department dep : departmentsAll)

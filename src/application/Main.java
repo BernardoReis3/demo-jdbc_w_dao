@@ -58,7 +58,6 @@ public class Main {
 		System.out.println("--- TEST : Delete Seller ---");
 		System.out.println("Inform an id to delete: ");
 		int id = scanner.nextInt();
-		
 		sellerDAO.deleteById(id);;
 		System.out.println("Delete successful ");
 		
