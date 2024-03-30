@@ -10,9 +10,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.mysql.cj.xdevapi.PreparableStatement;
-
 import db.DB;
 import db.DBException;
 import model.dao.SellerDAO;
